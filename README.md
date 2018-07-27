@@ -1,1 +1,4 @@
-# gwm
+# GWM
+
+> To generate the watermark
+
