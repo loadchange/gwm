@@ -28,13 +28,13 @@ var Watermark = function Watermark(_ref) {
     var _ref$txt = _ref.txt,
         txt = _ref$txt === undefined ? '' : _ref$txt,
         _ref$x = _ref.x,
-        x = _ref$x === undefined ? 22 : _ref$x,
+        x = _ref$x === undefined ? 0 : _ref$x,
         _ref$y = _ref.y,
         y = _ref$y === undefined ? 0 : _ref$y,
         _ref$xSpace = _ref.xSpace,
-        xSpace = _ref$xSpace === undefined ? 20 : _ref$xSpace,
+        xSpace = _ref$xSpace === undefined ? 0 : _ref$xSpace,
         _ref$ySpace = _ref.ySpace,
-        ySpace = _ref$ySpace === undefined ? 20 : _ref$ySpace,
+        ySpace = _ref$ySpace === undefined ? 0 : _ref$ySpace,
         _ref$font = _ref.font,
         font = _ref$font === undefined ? 'microsoft yahe' : _ref$font,
         _ref$color = _ref.color,
@@ -42,13 +42,13 @@ var Watermark = function Watermark(_ref) {
         _ref$fontSize = _ref.fontSize,
         fontSize = _ref$fontSize === undefined ? 12 : _ref$fontSize,
         _ref$alpha = _ref.alpha,
-        alpha = _ref$alpha === undefined ? 0.1 : _ref$alpha,
+        alpha = _ref$alpha === undefined ? 0.9 : _ref$alpha,
         _ref$width = _ref.width,
-        width = _ref$width === undefined ? 150 : _ref$width,
+        width = _ref$width === undefined ? 158 : _ref$width,
         _ref$height = _ref.height,
         height = _ref$height === undefined ? 100 : _ref$height,
         _ref$angle = _ref.angle,
-        angle = _ref$angle === undefined ? -15 : _ref$angle;
+        angle = _ref$angle === undefined ? -0 : _ref$angle;
     classCallCheck(this, Watermark);
 
     this.txt = txt;
@@ -96,13 +96,12 @@ var CanvasWay = function () {
                 angle = _watermark.angle;
 
             var ctx = this.canvas.getContext('2d');
-            ctx.textAlign = this.watermark.txt;
+            ctx.textBaseline = 'top';
             ctx.fillStyle = color;
             ctx.globalAlpha = alpha;
             ctx.font = fontSize + 'px ' + font;
             ctx.rotate(Math.PI / 180 * angle);
-            ctx.fillText(txt, x + xSpace / 2, y + ySpace / 2 + fontSize);
-
+            ctx.fillText(txt, xSpace / 2 + x, ySpace / 2 + y);
             return this.canvas.toDataURL();
         }
     }]);
@@ -216,11 +215,12 @@ var SvgWay = function () {
                 height = _watermark.height,
                 xSpace = _watermark.xSpace,
                 ySpace = _watermark.ySpace,
+                font = _watermark.font,
                 fontSize = _watermark.fontSize,
                 alpha = _watermark.alpha,
                 angle = _watermark.angle;
 
-            var svgStr = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"" + (width + xSpace) + "\" height=\"" + (height + ySpace) + "\">\n                <text x=\"50%\" y=\"50%\" dy=\"12px\"\n                    text-anchor=\"middle\"\n                    stroke=\"#000000\"\n                    stroke-width=\"1\"\n                    stroke-opacity=\"" + alpha + "\"\n                    fill=\"none\"\n                    transform=\"rotate(" + angle + ", 120 120)\"\n                    style=\"font-size: " + fontSize + ";\">\n                    " + txt + "\n                </text>\n            </svg>";
+            var svgStr = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"" + (width + xSpace) + "\" height=\"" + (height + ySpace) + "\">\n                <text x=\"50%\" y=\"0\" dy=\"12px\"\n                    text-anchor=\"middle\"\n                    stroke=\"#000000\"\n                    stroke-width=\"1\"\n                    stroke-opacity=\"" + alpha + "\"\n                    fill=\"none\"\n                    transform=\"rotate(" + angle + ", 0 0)\"\n                    style=\"font-size: " + fontSize + ";font-weight: " + font + "\">\n                    " + txt + "\n                </text>\n            </svg>";
             return "data:image/svg+xml;base64," + window.btoa(unescape(encodeURIComponent(svgStr)));
         }
     }]);
@@ -234,22 +234,23 @@ var gwmStyle = {
     right: 0,
     bottom: 0,
     left: 0,
-    overflow: 'hidden'
-    // backgroundImage: `url("${img}")`
+    width: '158px',
+    height: '100px',
+    overflow: 'hidden',
+    // backgroundImage: `url("${img}")`,
+    backgroundRepeat: 'no-repeat'
 };
 for (var key in gwmStyle) {
     gwmDiv.style[key] = gwmStyle[key];
 }
 
-var w = new Watermark({ txt: '20180727 内部资料 请勿外传' });
+var w = new Watermark({ txt: '20180727 内部资料' });
 // const img = new CanvasWay(w).render()
 var img = new SvgWay(w).render();
 gwmDiv.style.backgroundImage = 'url("' + img + '")';
 document.body.appendChild(gwmDiv);
 
-//
-// const htmlw = new Watermark({txt: '20180726 王彦民 E084817', x: 22, y: 0,})
-// const elementWay = new ElementWay(htmlw)
+// const elementWay = new ElementWay(w)
 // gwmDiv.appendChild(elementWay.render())
 // document.body.appendChild(gwmDiv)
 //# sourceMappingURL=gwm.js.map
