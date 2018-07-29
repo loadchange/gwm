@@ -30,7 +30,7 @@ var Watermark = function Watermark(_ref) {
         _ref$x = _ref.x,
         x = _ref$x === undefined ? 0 : _ref$x,
         _ref$y = _ref.y,
-        y = _ref$y === undefined ? 0 : _ref$y,
+        y = _ref$y === undefined ? 50 : _ref$y,
         _ref$xSpace = _ref.xSpace,
         xSpace = _ref$xSpace === undefined ? 0 : _ref$xSpace,
         _ref$ySpace = _ref.ySpace,
@@ -42,13 +42,13 @@ var Watermark = function Watermark(_ref) {
         _ref$fontSize = _ref.fontSize,
         fontSize = _ref$fontSize === undefined ? 12 : _ref$fontSize,
         _ref$alpha = _ref.alpha,
-        alpha = _ref$alpha === undefined ? 0.9 : _ref$alpha,
+        alpha = _ref$alpha === undefined ? 0.5 : _ref$alpha,
         _ref$width = _ref.width,
         width = _ref$width === undefined ? 158 : _ref$width,
         _ref$height = _ref.height,
         height = _ref$height === undefined ? 100 : _ref$height,
         _ref$angle = _ref.angle,
-        angle = _ref$angle === undefined ? -0 : _ref$angle;
+        angle = _ref$angle === undefined ? -6 : _ref$angle;
     classCallCheck(this, Watermark);
 
     this.txt = txt;
@@ -87,6 +87,8 @@ var CanvasWay = function () {
                 txt = _watermark.txt,
                 x = _watermark.x,
                 y = _watermark.y,
+                width = _watermark.width,
+                height = _watermark.height,
                 xSpace = _watermark.xSpace,
                 ySpace = _watermark.ySpace,
                 font = _watermark.font,
@@ -97,10 +99,12 @@ var CanvasWay = function () {
 
             var ctx = this.canvas.getContext('2d');
             ctx.textBaseline = 'top';
+            ctx.textAlign = 'left';
             ctx.fillStyle = color;
             ctx.globalAlpha = alpha;
             ctx.font = fontSize + 'px ' + font;
             ctx.rotate(Math.PI / 180 * angle);
+            ctx.translate(-15, ySpace / 2 + y / 2);
             ctx.fillText(txt, xSpace / 2 + x, ySpace / 2 + y);
             return this.canvas.toDataURL();
         }
@@ -154,8 +158,8 @@ var ElementWay = function () {
             span.innerHTML = txt;
             bindCSS(span, {
                 position: 'absolute',
-                top: x + 'px',
-                left: y + 'px',
+                top: y + 'px',
+                left: x + 'px',
                 fontFamily: font,
                 fontSize: fontSize + 'px',
                 color: color,
@@ -211,8 +215,11 @@ var SvgWay = function () {
         value: function render() {
             var _watermark = this.watermark,
                 txt = _watermark.txt,
+                x = _watermark.x,
+                y = _watermark.y,
                 width = _watermark.width,
                 height = _watermark.height,
+                color = _watermark.color,
                 xSpace = _watermark.xSpace,
                 ySpace = _watermark.ySpace,
                 font = _watermark.font,
@@ -220,7 +227,7 @@ var SvgWay = function () {
                 alpha = _watermark.alpha,
                 angle = _watermark.angle;
 
-            var svgStr = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"" + (width + xSpace) + "\" height=\"" + (height + ySpace) + "\">\n                <text x=\"50%\" y=\"0\" dy=\"12px\"\n                    text-anchor=\"middle\"\n                    stroke=\"#000000\"\n                    stroke-width=\"1\"\n                    stroke-opacity=\"" + alpha + "\"\n                    fill=\"none\"\n                    transform=\"rotate(" + angle + ", 0 0)\"\n                    style=\"font-size: " + fontSize + ";font-weight: " + font + "\">\n                    " + txt + "\n                </text>\n            </svg>";
+            var svgStr = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"" + (width + xSpace) + "px\" height=\"" + (height + ySpace) + "px\">\n                <text x=\"" + x + "px\" y=\"" + y + "px\" dy=\"12px\"\n                    text-anchor=\"start\"\n                    stroke=\"" + color + "\"\n                    stroke-width=\"1\"\n                    stroke-opacity=\"" + alpha + "\"\n                    fill=\"none\"\n                    transform=\"rotate(" + angle + ", " + x + " " + y + ")\"\n                    font-weight=\"100\"\n                    font-size=\"" + fontSize + "\"\n                    font-family=\"" + font + "\"\n                    >\n                    " + txt + "\n                </text>\n            </svg>";
             return "data:image/svg+xml;base64," + window.btoa(unescape(encodeURIComponent(svgStr)));
         }
     }]);
@@ -244,12 +251,19 @@ for (var key in gwmStyle) {
     gwmDiv.style[key] = gwmStyle[key];
 }
 
-var w = new Watermark({ txt: '20180727 内部资料' });
-// const img = new CanvasWay(w).render()
-var img = new SvgWay(w).render();
+var w = new Watermark({ txt: '20180727 内部资料 请勿外传', angle: -15, color: '#ff0000' });
+//
+var img = new CanvasWay(w).render();
 gwmDiv.style.backgroundImage = 'url("' + img + '")';
 document.body.appendChild(gwmDiv);
+//
+// w.color='#2196f3'
+// const img = new SvgWay(w).render()
+// gwmDiv.style.backgroundImage = `url("${img}")`
+// document.body.appendChild(gwmDiv)
 
+
+// w.color = '#000'
 // const elementWay = new ElementWay(w)
 // gwmDiv.appendChild(elementWay.render())
 // document.body.appendChild(gwmDiv)
