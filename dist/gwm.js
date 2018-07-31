@@ -1,5 +1,14 @@
 'use strict';
 
+var now = new Date();
+var fullYear = now.getFullYear();
+var month = now.getMonth() >= 9 ? now.getMonth() + 1 : "0" + (now.getMonth() + 1);
+var date = now.getDate();
+
+var dateConvert = (function () {
+  return "" + fullYear + month + date;
+});
+
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -47,7 +56,7 @@ var Watermark = function Watermark(_ref) {
         angle = _ref$angle === undefined ? -15 : _ref$angle;
     classCallCheck(this, Watermark);
 
-    this.txt = txt || '内部资料 请勿外传';
+    this.txt = txt || dateConvert() + ' \u5185\u90E8\u8D44\u6599 \u8BF7\u52FF\u5916\u4F20';
     this.width = width;
     this.height = height;
     this.x = x;
@@ -223,50 +232,59 @@ var SvgWay = function () {
     return SvgWay;
 }();
 
-function getGwm() {
+var creator = (function () {
     var gwmDiv = document.createElement('div');
-    var gwmStyle = {
-        position: 'absolute',
+    bindCSS(gwmDiv, {
+        position: 'fixed',
         top: 0,
-        right: 0,
-        bottom: 0,
         left: 0,
-        width: '178px',
-        height: '120px',
+        width: '100%',
+        height: '100%',
         overflow: 'hidden',
         backgroundRepeat: 'no-repeat'
-    };
-    for (var key in gwmStyle) {
-        gwmDiv.style[key] = gwmStyle[key];
-    }
+    });
     return gwmDiv;
-}
-
-var w = new Watermark({
-    width: 178,
-    height: 120,
-    txt: '20180727 内部资料 请勿外传', angle: -15,
-    x: 10, y: 60,
-    color: '#ff0000'
 });
-//
-var img = new CanvasWay(w).render();
-var gwm1 = getGwm();
-gwm1.style.backgroundImage = 'url("' + img + '")';
-document.body.appendChild(gwm1);
 
-// success
-w.color = '#2196f3';
-w.txt = '20180727 内部资料 请勿';
-var img2 = new SvgWay(w).render();
-var gwm2 = getGwm();
-gwm2.style.backgroundImage = 'url("' + img2 + '")';
-document.body.appendChild(gwm2);
+(function () {
+    var CANVAS = 'canvas';
+    var SVG = 'svg';
+    var ELEMENT = 'element';
 
-w.color = '#000';
-w.txt = '20180727 内部资料';
-var elementWay = new ElementWay(w);
-var gwm3 = getGwm();
-gwm3.appendChild(elementWay.render());
-document.body.appendChild(gwm3);
+    var creation = function creation(opts) {
+        var way = [CANVAS, SVG, ELEMENT];
+        var gwm = creator();
+        var wm = new Watermark(opts);
+        var impl = null;
+        var result = null;
+        var mode = opts.mode;
+
+        if (mode) {
+            mode = mode.toLowerCase();
+            mode = way.indexOf(mode) >= 0 ? mode : '';
+        }
+        if (!mode) {
+            mode = 'canvas';
+        }
+        switch (mode) {
+            case CANVAS:
+                impl = new CanvasWay(wm);
+                break;
+            case SVG:
+                impl = new SvgWay(wm);
+                break;
+            default:
+                impl = new ElementWay(wm);
+        }
+        result = impl.render();
+        if (mode === ELEMENT) {
+            gwm.appendChild(result);
+        } else {
+            gwm.style.background = 'url("' + result + '")';
+        }
+        document.body.appendChild(gwm);
+    };
+
+    window.gwm = creation;
+})();
 //# sourceMappingURL=gwm.js.map
