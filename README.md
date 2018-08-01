@@ -5,15 +5,12 @@
 用于内部系统生成水印，可提示信息安全与责任追踪。安全问题不容忽视，对于内部人员敏感操作有一定的提示作用。
 
 ### 特性
-+ 支持常见的 alert、confirm、toast、notice 四种类型弹窗
-+ 可选择使用 IOS 或者 Material Design 风格的弹窗
-+ 可自定义按钮的文字、样式、回调函数，支持多个按钮
-+ 多个弹窗状态改变回调函数
-+ 同时支持 jQuery 和 Zepto 库
++ 支持生成 canvas、svg、element 三种类型水印
++ 支持元素监控，防止篡改
 + 可扩展性强
 
 ### 截图
-<p align="center"><img src="https://raw.githubusercontent.com/loadchange/gwm/master/images/demo.png" width="550"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/loadchange/gwm/master/images/demo.png" width="700"></p>
 
 ## 示例
 点击这里查看效果→：[Demo示例](https://loadchange.github.io/gwm/index.html)
