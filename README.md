@@ -91,6 +91,16 @@ gwm.creation()
             <td>-15</td>
             <td>水印文字倾斜角度</td>
         </tr>
+        <tr>
+            <td>mode</td>
+            <td>canvas</td>
+            <td>可选参数[canvas, svg, element]</td>
+        </tr>
+        <tr>
+            <td>watch</td>
+            <td>true</td>
+            <td>监控水印元素是否被篡改<br>篡改后触发重绘</td>
+        </tr>
     </tbody>
 </table>
 
