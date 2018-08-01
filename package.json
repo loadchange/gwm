@@ -1,12 +1,11 @@
 {
   "name": "gwm",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "generate watermark",
   "main": "dist/gwm.js",
   "scripts": {
     "dev": "NODE_ENV=development ./node_modules/.bin/rollup -c rollup.config.js -w",
-    "build": "NODE_ENV=production ./node_modules/.bin/rollup -c rollup.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "NODE_ENV=production ./node_modules/.bin/rollup -c rollup.config.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +16,7 @@
     "watermark",
     "水印"
   ],
-  "author": "",
+  "author": "LoadChange",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/loadchange/gwm/issues"
