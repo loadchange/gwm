@@ -8,7 +8,7 @@ export default {
     entry: 'lib/index.js',
     output: {
         file: 'dist/gwm.js',
-        format: 'cjs',
+        format: 'umd',
         sourcemap: true
     },
     plugins: [
