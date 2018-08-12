@@ -9,7 +9,7 @@ export default {
     output: {
         file: 'dist/gwm.js',
         format: 'umd',
-        sourcemap: true
+        sourcemap: false
     },
     plugins: [
         resolve(),
