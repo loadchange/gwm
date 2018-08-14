@@ -7,6 +7,7 @@ import {uglify} from 'rollup-plugin-uglify';
 export default {
     entry: 'lib/index.js',
     output: {
+        name: 'gwm',
         file: 'dist/gwm.js',
         format: 'umd',
         sourcemap: false
