@@ -1,6 +1,6 @@
 {
   "name": "gwm",
-  "version": "0.1.29",
+  "version": "0.2.0",
   "description": "generate watermark",
   "main": "dist/gwm.js",
   "scripts": {
