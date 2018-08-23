@@ -101,6 +101,16 @@ gwm.creation()
             <td>true</td>
             <td>监控水印元素是否被篡改<br>篡改后触发重绘</td>
         </tr>
+        <tr>
+            <td>css</td>
+            <td>false</td>
+            <td>设置水印元素样式</td>
+        </tr>
+        <tr>
+            <td>container</td>
+            <td>false</td>
+            <td>传入一个包裹容器，如：document.getElementById('app')，默认为body</td>
+        </tr>
     </tbody>
 </table>
 
