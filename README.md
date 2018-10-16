@@ -1,5 +1,8 @@
 # gwm.js
 
+[![](https://img.shields.io/npm/v/gwm.svg)](https://www.npmjs.com/package/gwm)
+[![](https://img.shields.io/npm/dm/gwm.svg)](https://www.npmjs.com/package/gwm)
+
 > Generate Watermark
 
 用于内部系统生成水印，可提示信息安全与责任追踪。安全问题不容忽视，对于内部人员敏感操作有一定的提示作用。
