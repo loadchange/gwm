@@ -111,7 +111,7 @@ gwm.creation()
         </tr>
         <tr>
             <td>container</td>
-            <td>false</td>
+            <td>body</td>
             <td>传入一个包裹容器，可以是一个`string`类型的选择器，也可以是一个DOM对象，默认为body</td>
         </tr>
     </tbody>
