@@ -106,7 +106,7 @@ gwm.creation()
         </tr>
         <tr>
             <td>css</td>
-            <td>false</td>
+            <td>null</td>
             <td>设置水印元素样式</td>
         </tr>
         <tr>
