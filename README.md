@@ -1,78 +1,79 @@
 # gwm.js
 
+[中文](./README-CN.md)
 [![](https://img.shields.io/npm/v/gwm.svg)](https://www.npmjs.com/package/gwm)
 [![](https://img.shields.io/npm/dm/gwm.svg)](https://www.npmjs.com/package/gwm)
 
 > Generate Watermark
 
-用于内部系统生成水印，可提示信息安全与责任追踪。安全问题不容忽视，对于内部人员敏感操作有一定的提示作用。
+It can be used to generate watermarking in internal system, which can prompt information security and responsibility tracking. Safety issues can not be ignored, which has a certain role in prompting the sensitive operation of internal personnel.
 
-### 特性
-+ 支持生成 canvas、svg、element 三种类型水印
-+ 支持元素监控，防止篡改
-+ 可扩展性强
+### Characteristic
++ Support the generation of three types of watermarking: canvas, SVG and element
++ Supporting element monitoring to prevent tampering
++ Extensibility
 
-### 截图
+### Screenshot
 <p align="center"><img src="https://raw.githubusercontent.com/loadchange/gwm/master/images/demo.png" width="700"></p>
 
-## 示例
-点击这里查看效果→：[Demo示例](https://loadchange.github.io/gwm/index.html)
+## Example
+Click here to see the effect →：[Demo示例](https://loadchange.github.io/gwm/index.html)
 
 
-## 使用说明
-**1、引入 JS 文件**
+## Instructions
+**1、Introducing JS files**
 ```javascript
 <script src="../js/gwm.js"></script>
 ```
-或者使用 npm 安装
+Or install with NPM
 ```
 npm install gwm
 ```
 
-**2、构建水印**
+**2、Building watermark**
 ```
 gwm.creation()
 ```
 
-## 参数
+## Parameter
 <table>
     <thead>
         <tr>
-            <th>参数</th>
-            <th>默认值</th>
-            <th>说明</th>
+            <th>Parameter</th>
+            <th>Default value</th>
+            <th>Explain</th>
         </tr>                           
     </thead>
     <tbody>
         <tr>
             <td>txt</td>
             <td>date 内部资料 请勿外传</td>
-            <td>水印文字内容</td>
+            <td>Watermarking text content</td>
         </tr>
         <tr>
             <td>width</td>
             <td>158</td>
-            <td>水印画布宽度</td>
+            <td>Watermark Canvas Width</td>
         </tr>
         <tr>
             <td>height</td>
             <td>100</td>
-            <td>水印画布高度</td>
+            <td>Watermark canvas height</td>
         </tr>
         <tr>
             <td>x</td>
             <td>0</td>
-            <td>水印坐标x</td>
+            <td>Watermarking coordinate X</td>
         </tr>
         <tr>
             <td>y</td>
             <td>50</td>
-            <td>水印坐标y</td>
+            <td>Watermarking coordinate y</td>
         </tr>
         <tr>
             <td>font</td>
             <td>'microsoft yahe'</td>
-            <td>设置水印字体</td>
+            <td>Setting Watermark Font</td>
         </tr>
         <tr>
             <td>fontSize</td>
@@ -82,63 +83,63 @@ gwm.creation()
         <tr>
             <td>color</td>
             <td>#000</td>
-            <td>水印字体颜色</td>
+            <td>Watermark font size</td>
         </tr>
         <tr>
             <td>alpha</td>
             <td>0.1</td>
-            <td>水印字体透明度</td>
+            <td>Watermark font transparency</td>
         </tr>
         <tr>
             <td>angle</td>
             <td>-15</td>
-            <td>水印文字倾斜角度</td>
+            <td>Watermarking Text Tilt Angle</td>
         </tr>
         <tr>
             <td>mode</td>
             <td>canvas</td>
-            <td>可选参数[canvas, svg, element]</td>
+            <td>Optional parameters[canvas, svg, element]</td>
         </tr>
         <tr>
             <td>watch</td>
             <td>true</td>
-            <td>监控水印元素是否被篡改<br>篡改后触发重绘</td>
+            <td>Monitoring whether watermarking elements have been tampered with<br>Tampering triggers redrawing</td>
         </tr>
         <tr>
             <td>css</td>
             <td>null</td>
-            <td>设置水印元素样式</td>
+            <td>Setting Watermark Element Styles</td>
         </tr>
         <tr>
             <td>container</td>
             <td>body</td>
-            <td>传入一个包裹容器，可以是一个`string`类型的选择器，也可以是一个DOM对象，默认为body</td>
+            <td>Pass in a package container, which can be a `string` Type selector, or a DOM object, defaults to body</td>
         </tr>
     </tbody>
 </table>
 
 
-## 方法
-| 方法            | 说明  |
+## Method
+| Method            | Explain  |
 | :--------       | :----  |
-| gwm.creation | 创建水印。 |
-| gwm.observing | 手动开启观察者，当水印元素被篡改视，重新渲染水印元素。 |
-| gwm.cancel | 取消观察者，水印可以被隐藏或删除。 |
+| gwm.creation | Create a watermarking. |
+| gwm.observing | Manually open the observer, when the watermarking element is tampered with, re-render the watermarking element. |
+| gwm.cancel | Cancel the observer, the watermark can be hidden or deleted. |
 
 
-## 开发环境使用方法
-**1、安装**
+## The development environment using the method
+**1、Install**
 ```
 npm install
 ```
 
-**2、在本地运行项目**
+**2、Running projects locally**
 ```
 npm run dev
 ```
-打开 index.html 预览效果
+Open index.html preview effect
 
-**3、build 命令**
+**3、build command**
 ```
 npm run build
 ```
