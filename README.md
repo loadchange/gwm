@@ -112,6 +112,11 @@ gwm.creation()
             <td>Setting Watermark Element Styles</td>
         </tr>
         <tr>
+            <td>destroy</td>
+            <td>false</td>
+            <td>If `true`, cannot be called repeatedly `creation`</td>
+        </tr>
+        <tr>
             <td>container</td>
             <td>body</td>
             <td>Pass in a package container, which can be a `string` Type selector, or a DOM object, defaults to body</td>

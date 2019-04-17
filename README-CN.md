@@ -110,6 +110,11 @@ gwm.creation()
             <td>设置水印元素样式</td>
         </tr>
         <tr>
+            <td>destroy</td>
+            <td>false</td>
+            <td>值为 `true` 时，不能重复调用 `creation`</td>
+        </tr>
+        <tr>
             <td>container</td>
             <td>body</td>
             <td>传入一个包裹容器，可以是一个`string`类型的选择器，也可以是一个DOM对象，默认为body</td>
