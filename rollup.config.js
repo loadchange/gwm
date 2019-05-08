@@ -5,7 +5,7 @@ import replace from 'rollup-plugin-replace';
 import {uglify} from 'rollup-plugin-uglify';
 
 export default {
-    entry: 'lib/index.js',
+    input: 'lib/index.js',
     output: {
         name: 'gwm',
         file: 'dist/gwm.js',

@@ -113,7 +113,7 @@ gwm.creation()
         </tr>
         <tr>
             <td>destroy</td>
-            <td>false</td>
+            <td>true</td>
             <td>If `true`, cannot be called repeatedly `creation`</td>
         </tr>
         <tr>
