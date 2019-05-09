@@ -1,22 +1,25 @@
+import Watermark from '../watermark';
 import bindCSS from '../helpers/bindCSS';
 
-export default class ElementWay {
-  constructor(watermark) {
+class ElementWay {
+  private watermark: Watermark;
+
+  constructor(watermark: Watermark) {
     this.watermark = watermark;
   }
-  
-  _createItem() {
+
+  _createItem(): HTMLDivElement {
     const { txt, x, y, font, color, fontSize, alpha, angle, width, height } = this.watermark;
-    const item = document.createElement('div');
+    const item: HTMLDivElement = document.createElement('div');
     bindCSS(item, {
       position: 'relative',
       width,
       height,
       flex: `0 0 ${width}px`,
       overflow: 'hidden',
-      pointerEvents: 'none'
+      pointerEvents: 'none',
     });
-    const span = document.createElement('span');
+    const span: HTMLSpanElement = document.createElement('span');
     span.innerHTML = txt;
     bindCSS(span, {
       position: 'absolute',
@@ -24,7 +27,7 @@ export default class ElementWay {
       left: `${x}px`,
       fontFamily: font,
       fontSize: `${fontSize}px`,
-      color: color,
+      color,
       lineHeight: 1.5,
       opacity: alpha,
       fontWeight: 400,
@@ -32,26 +35,30 @@ export default class ElementWay {
       transformOrigin: '0 0',
       userSelect: 'none',
       whiteSpace: 'nowrap',
-      overflow: 'hidden'
+      overflow: 'hidden',
     });
     item.appendChild(span);
     return item;
   }
 
-  render() {
+  render(): HTMLDivElement {
     let i = 0;
     const { width, height } = this.watermark;
     const { clientWidth, clientHeight } = document.documentElement || document.body;
-    const column = Math.ceil(clientWidth / width);
-    const rows = Math.ceil(clientHeight / height);
-    const wrap = document.createElement('div');
+    const column: number = Math.ceil(clientWidth / width);
+    const rows: number = Math.ceil(clientHeight / height);
+    const wrap: HTMLDivElement = document.createElement('div');
     bindCSS(wrap, {
       display: 'flex',
       flexWrap: 'wrap',
       width: `${width * column}px`,
-      height: `${height * rows}px`
+      height: `${height * rows}px`,
     });
-    for (; i < column * rows; i++) wrap.appendChild(this._createItem());
+    for (; i < column * rows; i++) {
+      wrap.appendChild(this._createItem());
+    }
     return wrap;
   }
 }
+
+export default ElementWay;

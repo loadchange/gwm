@@ -1,0 +1,9 @@
+{
+  "extends": ["tslint-config-ali"],
+  "rules": {
+    "max-line-length": {
+      "options": [120]
+    },
+    "newline-per-chained-call": false
+  }
+}

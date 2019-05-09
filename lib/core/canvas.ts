@@ -1,18 +1,23 @@
-export default class CanvasWay {
-  constructor(watermark) {
+import Watermark from '../watermark';
+
+class CanvasWay {
+  private watermark: Watermark;
+  private canvas: HTMLCanvasElement;
+
+  constructor(watermark: Watermark) {
     this.watermark = watermark;
     const { width, height } = watermark;
-    this.canvas = document.createElement("canvas");
-    this.canvas.setAttribute("width", width);
-    this.canvas.setAttribute("height", height);
+    this.canvas = document.createElement('canvas');
+    this.canvas.setAttribute('width', `${width}`);
+    this.canvas.setAttribute('height', `${height}`);
   }
 
-  render() {
+  render(): string {
     const { txt, x, y, width, height, font, color, fontSize, alpha, angle } = this.watermark;
-    const ctx = this.canvas.getContext("2d");
+    const ctx = this.canvas.getContext('2d');
     ctx.clearRect(0, 0, width, height);
-    ctx.textBaseline = "top";
-    ctx.textAlign = "left";
+    ctx.textBaseline = 'top';
+    ctx.textAlign = 'left';
     ctx.fillStyle = color;
     ctx.globalAlpha = alpha;
     ctx.font = `${fontSize}px ${font}`;
@@ -23,3 +28,5 @@ export default class CanvasWay {
     return this.canvas.toDataURL();
   }
 }
+
+export default CanvasWay;
