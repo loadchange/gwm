@@ -18,7 +18,7 @@ class ElementWay {
       flex: `0 0 ${width}px`,
       overflow: 'hidden',
       pointerEvents: 'none',
-    });
+    }, 'normal');
     const span: HTMLSpanElement = document.createElement('span');
     span.innerHTML = txt;
     bindCSS(span, {
@@ -36,7 +36,7 @@ class ElementWay {
       userSelect: 'none',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
-    });
+    }, 'normal');
     item.appendChild(span);
     return item;
   }
@@ -53,7 +53,7 @@ class ElementWay {
       flexWrap: 'wrap',
       width: `${width * column}px`,
       height: `${height * rows}px`,
-    });
+    }, 'normal');
     for (; i < column * rows; i++) {
       wrap.appendChild(this._createItem());
     }

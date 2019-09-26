@@ -5,22 +5,7 @@ import SvgWay from './core/svg';
 import creator, { observer, disconnect } from './helpers/creator';
 import bindCSS from './helpers/bindCSS';
 import { IOptions, IGenerateWatermark, IGwmObserver, IGwmObserverEvent } from './types';
-
-const CANVAS = 'canvas';
-const SVG = 'svg';
-const ELEMENT = 'element';
-const DEFAULT_STYLE = {
-  position: 'fixed',
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0,
-  overflow: 'hidden',
-  zIndex: -10,
-  backgroundRepeat: 'no-repeat',
-  display: 'block',
-  opacity: '1',
-};
+import { CANVAS, SVG, ELEMENT, DEFAULT_STYLE } from './constant';
 
 const wayFactory = (mode: string, wm: Watermark) => {
   let impl = null;
