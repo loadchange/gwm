@@ -18,6 +18,8 @@ const DEFAULT_STYLE = {
   overflow: 'hidden',
   zIndex: -10,
   backgroundRepeat: 'no-repeat',
+  display: 'block',
+  opacity: '1',
 };
 
 const wayFactory = (mode: string, wm: Watermark) => {
@@ -59,6 +61,7 @@ class GenerateWatermark implements IGenerateWatermark {
   wrap: HTMLElement;
   gwmDom: HTMLElement;
   observer: IGwmObserver | IGwmObserverEvent;
+
   creation(opts: IOptions) {
     opts.css = Object.assign({}, DEFAULT_STYLE, opts.css);
     this.opts = opts;
@@ -74,7 +77,7 @@ class GenerateWatermark implements IGenerateWatermark {
     const impl = wayFactory(mode, wm);
     const result = impl.render();
     if (mode === ELEMENT) {
-      this.gwmDom.appendChild(result);
+      this.gwmDom.appendChild(result as HTMLDivElement);
     } else {
       this.gwmDom.style.background = `url("${result}")`;
     }

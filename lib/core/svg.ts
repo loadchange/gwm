@@ -1,7 +1,7 @@
 import Watermark from '../watermark';
 
 class SvgWay {
-  private watermark: Watermark;
+  private readonly watermark: Watermark;
 
   constructor(watermark: Watermark) {
     this.watermark = watermark;

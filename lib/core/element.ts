@@ -2,7 +2,7 @@ import Watermark from '../watermark';
 import bindCSS from '../helpers/bindCSS';
 
 class ElementWay {
-  private watermark: Watermark;
+  private readonly watermark: Watermark;
 
   constructor(watermark: Watermark) {
     this.watermark = watermark;

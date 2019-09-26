@@ -1,8 +1,10 @@
 import bindCSS, { isSupport } from './bindCSS';
 import { CallbackFunction, IGenerateWatermark, IGwmObserver, IGwmObserverEvent } from '../types';
 
-const GWM_ID = `__gwm_${+new Date()}`;
-const mutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+declare var WebKitMutationObserver: any;
+declare var MozMutationObserver: any;
+
+const mutationObserver = MutationObserver || WebKitMutationObserver || MozMutationObserver;
 
 function bindMutationEvent(target: HTMLElement, container: HTMLElement, callback: CallbackFunction): IGwmObserverEvent {
   const eventList = [
@@ -60,16 +62,14 @@ export const disconnect = (currentObserver: IGwmObserver | IGwmObserverEvent) =>
 export default (gwm: IGenerateWatermark) => {
   const { gwmDom } = gwm;
   const { css } = gwm.opts;
-  const target = gwmDom ? gwmDom : document.getElementById(GWM_ID);
-  if (target) {
-    target.remove();
+  if (gwmDom) {
+    gwmDom.remove();
   }
   const gwmDiv = document.createElement('div');
   if (isSupport('pointerEvents')) {
     css.pointerEvents = 'none';
-    css.zIndex = css.zIndex < 0 ? '999999' : css.zIndex;
+    css.zIndex = parseInt(`${css.zIndex}`, 10) > 0 ? css.zIndex : '999999';
   }
   bindCSS(gwmDiv, css);
-  gwmDiv.id = GWM_ID;
   return gwmDiv;
 };
