@@ -12,7 +12,7 @@ class CanvasWay {
     this.canvas.setAttribute('height', `${height}`);
   }
 
-  render(): string {
+  public render(): string {
     const { txt, x, y, width, height, font, color, fontSize, alpha, angle } = this.watermark;
     const ctx = this.canvas.getContext('2d');
     if (ctx === null) {

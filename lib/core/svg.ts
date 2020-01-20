@@ -7,7 +7,7 @@ class SvgWay {
     this.watermark = watermark;
   }
 
-  render(): string {
+  public render(): string {
     const { txt, x, y, width, height, color, font, fontSize, alpha, angle } = this.watermark;
     const svgStr = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}px" height="${height}px">
                 <text x="${x}px" y="${y}px" dy="${fontSize}px"

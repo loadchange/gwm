@@ -8,26 +8,21 @@ import { IOptions, IGenerateWatermark, IGwmObserver, IGwmObserverEvent } from '.
 import { CANVAS, SVG, ELEMENT, DEFAULT_STYLE } from './constant';
 
 const wayFactory = (mode: string, wm: Watermark) => {
-  let impl = null;
   const way = [CANVAS, SVG, ELEMENT];
   if (mode) {
     mode = mode.toLowerCase();
-    mode = way.indexOf(mode) >= 0 ? mode : '';
+    mode = way.includes(mode) ? mode : '';
   }
   if (!mode) {
     mode = 'svg';
   }
-  switch (mode) {
-    case CANVAS:
-      impl = new CanvasWay(wm);
-      break;
-    case SVG:
-      impl = new SvgWay(wm);
-      break;
-    default:
-      impl = new ElementWay(wm);
+  if (mode === CANVAS) {
+    return new CanvasWay(wm);
   }
-  return impl;
+  if (mode === SVG) {
+    return new SvgWay(wm);
+  }
+  return new ElementWay(wm);
 };
 
 const getElement = (container: HTMLElement | string): HTMLElement => {
@@ -42,12 +37,12 @@ const getElement = (container: HTMLElement | string): HTMLElement => {
 };
 
 class GenerateWatermark implements IGenerateWatermark {
-  opts: IOptions;
-  wrap: HTMLElement;
-  gwmDom: HTMLElement;
-  observer: IGwmObserver | IGwmObserverEvent;
+  public opts: IOptions;
+  public wrap: HTMLElement;
+  public gwmDom: HTMLElement;
+  public observer: IGwmObserver | IGwmObserverEvent;
 
-  creation(opts: IOptions) {
+  public creation(opts: IOptions) {
     opts.css = Object.assign({}, DEFAULT_STYLE, opts.css);
     this.opts = opts;
     this.cancel();
@@ -80,11 +75,11 @@ class GenerateWatermark implements IGenerateWatermark {
     }
   }
 
-  observing() {
+  public observing() {
     return observer(this.gwmDom, this.wrap, () => this.creation(this.opts));
   }
 
-  cancel(): void {
+  public cancel(): void {
     if (this.observer) {
       disconnect(this.observer);
     }

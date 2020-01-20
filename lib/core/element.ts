@@ -8,7 +8,7 @@ class ElementWay {
     this.watermark = watermark;
   }
 
-  _createItem(): HTMLDivElement {
+  private _createItem(): HTMLDivElement {
     const { txt, x, y, font, color, fontSize, alpha, angle, width, height } = this.watermark;
     const item: HTMLDivElement = document.createElement('div');
     bindCSS(item, {
@@ -41,7 +41,7 @@ class ElementWay {
     return item;
   }
 
-  render(): HTMLDivElement {
+  public render(): HTMLDivElement {
     let i = 0;
     const { width, height } = this.watermark;
     const { clientWidth, clientHeight } = document.documentElement || document.body;

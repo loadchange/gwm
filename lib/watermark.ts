@@ -1,19 +1,17 @@
-import dateConvert from './helpers/dateConvert';
-
 class Watermark {
-  txt: string;
-  width: number;
-  height: number;
-  x: number;
-  y: number;
-  font: string;
-  fontSize: number;
-  color: string;
-  alpha: number;
-  angle: number;
+  public txt: string;
+  public width: number;
+  public height: number;
+  public x: number;
+  public y: number;
+  public font: string;
+  public fontSize: number;
+  public color: string;
+  public alpha: number;
+  public angle: number;
 
   constructor({
-    txt = `${dateConvert()} Top secret`,
+    txt = `${new Date().toLocaleDateString()} Top secret`,
     x = 0,
     y = 50,
     font = 'microsoft yahe',

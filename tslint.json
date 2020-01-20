@@ -1,6 +1,9 @@
 {
   "extends": ["tslint-config-ali"],
   "rules": {
+    "member-ordering": false,
+    "no-shadowed-variable": false,
+    "member-access": true,
     "max-line-length": {
       "options": [120]
     },

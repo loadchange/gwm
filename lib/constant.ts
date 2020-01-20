@@ -13,4 +13,3 @@ export const DEFAULT_STYLE = {
   display: 'block',
   opacity: '1',
 };
-

@@ -1,6 +1,6 @@
 {
   "name": "gwm",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "generate watermark",
   "main": "dist/gwm.js",
   "scripts": {
@@ -23,18 +23,19 @@
   },
   "homepage": "https://loadchange.github.io/gwm/index.html",
   "devDependencies": {
-    "@babel/core": "^7.6.2",
-    "@babel/preset-env": "^7.6.2",
-    "@babel/preset-typescript": "^7.6.0",
-    "rollup": "^1.21.4",
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
+    "@rollup/plugin-commonjs": "^11.0.1",
+    "@rollup/plugin-node-resolve": "^7.0.0",
+    "@rollup/plugin-replace": "^2.3.0",
+    "rollup": "^1.29.0",
     "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-tslint": "^0.2.2",
-    "rollup-plugin-uglify": "^6.0.3",
-    "tslint": "^5.20.0",
+    "rollup-plugin-typescript": "^1.0.1",
+    "rollup-plugin-uglify": "^6.0.4",
+    "tslint": "^5.20.1",
     "tslint-config-ali": "^0.2.4",
-    "typescript": "^3.6.3"
+    "typescript": "^3.7.5"
   }
 }

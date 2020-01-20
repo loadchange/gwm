@@ -1,7 +1,8 @@
 import babel from 'rollup-plugin-babel';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import replace from 'rollup-plugin-replace';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import replace from '@rollup/plugin-replace';
+import typescript from 'rollup-plugin-typescript';
 import tslint from 'rollup-plugin-tslint';
 import { uglify } from 'rollup-plugin-uglify';
 
@@ -19,6 +20,7 @@ export default {
     resolve({ extensions }),
     commonjs(),
     tslint({}),
+    typescript({}),
     babel({
       babelrc: false,
       exclude: 'node_modules/**',
