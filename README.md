@@ -1,6 +1,4 @@
-# gwm.js
-
-[中文](./README-CN.md)
+# TypeScript library starter
 
 [![](https://img.shields.io/npm/v/gwm.svg)](https://www.npmjs.com/package/gwm)
 [![](https://img.shields.io/npm/dm/gwm.svg)](https://www.npmjs.com/package/gwm)
