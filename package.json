@@ -2,40 +2,122 @@
   "name": "gwm",
   "version": "0.5.0",
   "description": "generate watermark",
-  "main": "dist/gwm.js",
-  "scripts": {
-    "dev": "NODE_ENV=development rollup -c rollup.config.js -w",
-    "build": "NODE_ENV=production rollup -c rollup.config.js"
-  },
+  "keywords": [],
+  "main": "dist/gwm.umd.js",
+  "module": "dist/gwm.es5.js",
+  "typings": "dist/types/gwm.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": "LoadChange <soocto@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/loadchange/gwm.git"
   },
-  "keywords": [
-    "generate",
-    "watermark",
-    "水印"
-  ],
-  "author": "LoadChange",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/loadchange/gwm/issues"
+  "engines": {
+    "node": ">=6.0.0"
   },
-  "homepage": "https://loadchange.github.io/gwm/index.html",
+  "scripts": {
+    "lint": "tslint  --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
+    "prebuild": "rimraf dist",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts && typedoc --out docs --target es6 --theme minimal --mode file src && uglifyjs dist/gwm.umd.js -c -m -o dist/gwm.min.js",
+    "start": "rollup -c rollup.config.ts -w",
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watch",
+    "test:prod": "npm run lint && npm run test -- --no-cache",
+    "deploy-docs": "ts-node tools/gh-pages-publish",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls",
+    "commit": "git-cz",
+    "semantic-release": "semantic-release",
+    "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
+    "precommit": "lint-staged",
+    "travis-deploy-once": "travis-deploy-once"
+  },
+  "lint-staged": {
+    "{src,test}/**/*.ts": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "ts-jest"
+    },
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/test/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 95,
+        "lines": 95,
+        "statements": 95
+      }
+    },
+    "collectCoverageFrom": [
+      "src/*.{js,ts}"
+    ]
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "devDependencies": {
-    "@babel/core": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
-    "@babel/preset-typescript": "^7.8.3",
-    "@rollup/plugin-commonjs": "^11.0.1",
-    "@rollup/plugin-node-resolve": "^7.0.0",
-    "@rollup/plugin-replace": "^2.3.0",
-    "rollup": "^1.29.0",
-    "rollup-plugin-babel": "^4.3.3",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-json": "^4.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@rollup/plugin-replace": "^2.3.1",
+    "@types/jest": "^25.1.4",
+    "@types/node": "^13.9.1",
+    "colors": "^1.4.0",
+    "commitizen": "^4.0.3",
+    "coveralls": "^3.0.9",
+    "cross-env": "^7.0.2",
+    "cz-conventional-changelog": "^3.1.0",
+    "husky": "^4.2.3",
+    "jest": "^25.1.0",
+    "jest-config": "^25.1.0",
+    "lint-staged": "^10.0.8",
+    "lodash.camelcase": "^4.3.0",
+    "prettier": "^1.19.1",
+    "prompt": "^1.0.0",
+    "replace-in-file": "^5.0.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.0.6",
+    "rollup-plugin-sourcemaps": "^0.5.0",
     "rollup-plugin-tslint": "^0.2.2",
-    "rollup-plugin-typescript": "^1.0.1",
-    "rollup-plugin-uglify": "^6.0.4",
-    "tslint": "^5.20.1",
-    "tslint-config-ali": "^0.2.4",
-    "typescript": "^3.7.5"
+    "rollup-plugin-typescript2": "^0.26.0",
+    "semantic-release": "^17.0.4",
+    "shelljs": "^0.8.3",
+    "travis-deploy-once": "^5.0.11",
+    "ts-jest": "^25.2.1",
+    "ts-node": "^8.6.2",
+    "tslint": "^6.1.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-config-standard": "^9.0.0",
+    "typedoc": "^0.17.0",
+    "typescript": "^3.8.3",
+    "uglify-js": "^3.8.0"
   }
 }
