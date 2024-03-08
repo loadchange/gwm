@@ -1,8 +1,8 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.gwm = factory());
-}(this, (function () { 'use strict';
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.gwm = factory());
+})(this, (function () { 'use strict';
 
   var Watermark = /** @class */ (function () {
       function Watermark(_a) {
@@ -333,5 +333,5 @@
 
   return index;
 
-})));
+}));
 //# sourceMappingURL=gwm.umd.js.map
