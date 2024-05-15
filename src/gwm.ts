@@ -33,7 +33,9 @@ export class GenerateWatermark {
   gwmDom?: HTMLElement;
   observer?: GwmObserver | GwmObserverEvent;
 
-  creation(opts: Options) {
+  creation(opts: Options = {
+    txt: `${new Date().toLocaleDateString()} Top secret`,
+  }) {
     this.opts = opts;
     this.opts.css = assignStyle(DEFAULT_STYLE, opts.css);
     this.cancel();
