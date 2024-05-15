@@ -23,6 +23,7 @@ interface Options {
   css?: CSSStyleDeclaration;
   destroy?: boolean;
   container?: string | HTMLElement;
+  count?: number; // Optional property to specify the number of watermarks
 }
 
 interface IGwmObserverItemEvent {

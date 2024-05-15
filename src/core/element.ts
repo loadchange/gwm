@@ -41,12 +41,13 @@ class ElementWay {
     return item;
   }
 
-  public render(): HTMLDivElement {
+  public render(count?: number): HTMLDivElement {
     let i = 0;
     const { width, height } = this.watermark;
     const { clientWidth, clientHeight } = document.documentElement || document.body;
     const column = Math.ceil(clientWidth / width);
     const rows = Math.ceil(clientHeight / height);
+    const total = count || column * rows;
     const wrap = document.createElement('div') as HTMLDivElement;
     bindCSS(wrap, Object.create({
       display: 'flex',
@@ -54,7 +55,7 @@ class ElementWay {
       width: `${ width * column }px`,
       height: `${ height * rows }px`,
     }) as CSSStyleDeclaration, 'normal');
-    for (; i < column * rows; i++) {
+    for (; i < total; i++) {
       wrap.appendChild(this.createItem());
     }
     return wrap;
