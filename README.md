@@ -77,12 +77,12 @@ gwm.creation()
         <tr>
             <td>fontSize</td>
             <td>12</td>
-            <td>水印字体大小</td>
+            <td>Watermark font size</td>
         </tr>
         <tr>
             <td>color</td>
             <td>#000</td>
-            <td>Watermark font size</td>
+            <td>Watermark font color</td>
         </tr>
         <tr>
             <td>alpha</td>
@@ -118,6 +118,11 @@ gwm.creation()
             <td>container</td>
             <td>body</td>
             <td>Pass in a package container, which can be a `string` Type selector, or a DOM object, defaults to body</td>
+        </tr>
+        <tr>
+            <td>count</td>
+            <td>null</td>
+            <td>Optional parameter, used to directly set the number of watermarks generated</td>
         </tr>
     </tbody>
 </table>
