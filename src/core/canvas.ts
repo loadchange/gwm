@@ -12,8 +12,13 @@ class CanvasWay {
     this.canvas.setAttribute('height', `${ height }`);
   }
 
+  private escapeSpecialCharacters(txt: string): string {
+    return txt.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
   public render(): string {
-    const { txt, x, y, width, height, font, color, fontSize, alpha, angle } = this.watermark;
+    const { x, y, width, height, font, color, fontSize, alpha, angle } = this.watermark;
+    const txt = this.escapeSpecialCharacters(this.watermark.txt);
     const ctx = this.canvas.getContext('2d');
     if (ctx === null) {
       throw new Error('getContext error');
