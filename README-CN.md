@@ -127,6 +127,14 @@ gwm.creation()
     </tbody>
 </table>
 
+## 自定义字体示例
+要使用自定义字体，您可以在创建水印时通过`font`参数指定所需的字体。例如，要将字体更改为`Arial`，您可以这样做：
+
+```javascript
+gwm.creation({
+  font: 'Arial'
+})
+```
 
 ## 方法
 | 方法            | 说明  |

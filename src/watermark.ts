@@ -14,7 +14,7 @@ class Watermark {
     txt = `${new Date().toLocaleDateString()} Top secret`,
     x = 0,
     y = 50,
-    font = 'microsoft yahe',
+    font = 'Arial', // Updated default font to Arial
     color = '#000',
     fontSize = 12,
     alpha = 0.1,

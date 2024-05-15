@@ -127,6 +127,14 @@ gwm.creation()
     </tbody>
 </table>
 
+## Custom Font Example
+To use a custom font, you can specify the desired font through the `font` parameter when creating the watermark. For example, to change the font to `Arial`, you can do it like this:
+
+```javascript
+gwm.creation({
+  font: 'Arial'
+})
+```
 
 ## Method
 | Method            | Explain  |
