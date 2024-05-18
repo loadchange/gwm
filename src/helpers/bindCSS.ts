@@ -10,6 +10,10 @@ export const assignStyle = (...args: Array<CSSStyleDeclaration | undefined>): CS
 export default (elem: HTMLElement, css: CSSStyleDeclaration, priority?: string | null): HTMLElement => {
   const mergeStyle = assignStyle(elem.style, css);
   for (const key in mergeStyle) {
+    if (key === 'position' && elem.style.position) {
+      // If position property exists, preserve the original value
+      continue;
+    }
     if (priority === 'normal') {
       elem.style[key] = mergeStyle[key];
       continue;
