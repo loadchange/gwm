@@ -20,7 +20,6 @@ echo("Building docs...")
 exec("pnpm run docs:build") // Add build command
 echo("Deploying built docs!!!")
 cd("docs/.vitepress/dist") // Change to build output directory
-cd("docs")
 touch(".nojekyll")
 exec("git init")
 exec("git add .")
