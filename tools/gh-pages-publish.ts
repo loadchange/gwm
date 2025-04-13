@@ -16,8 +16,10 @@ if (typeof pkg.repository === "object") {
 let parsedUrl = url.parse(repoUrl)
 let repository = (parsedUrl.host || "") + (parsedUrl.path || "")
 let ghToken = process.env.GH_TOKEN
-
-echo("Deploying docs!!!")
+echo("Building docs...")
+exec("pnpm run docs:build") // Add build command
+echo("Deploying built docs!!!")
+cd("docs/.vitepress/dist") // Change to build output directory
 cd("docs")
 touch(".nojekyll")
 exec("git init")

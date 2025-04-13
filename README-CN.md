@@ -143,20 +143,58 @@ gwm.creation({
 | gwm.observing | 手动开启观察者，当水印元素被篡改视，重新渲染水印元素。 |
 | gwm.cancel | 取消观察者，水印可以被隐藏或删除。 |
 
+## 开发指南
 
-## 开发环境使用方法
-**1、安装**
-```
+### 环境要求
+- Node.js >= 20.0.0
+- npm >= 9.0.0
+
+### 安装
+```bash
+# 克隆仓库
+git clone https://github.com/loadchange/gwm.git
+cd gwm
+
+# 安装依赖
 npm install
 ```
 
-**2、在本地运行项目**
-```
+### 开发
+```bash
+# 启动开发服务器（支持热重载）
 npm run dev
 ```
-打开 index.html 预览效果
 
-**3、build 命令**
+### 测试
+```bash
+# 运行测试
+npm test
+
+# 运行测试并生成覆盖率报告
+npm run test:coverage
+
+# 以监视模式运行测试
+npm run test:watch
 ```
+
+### 构建
+```bash
+# 生产环境构建（包含类型声明）
 npm run build
+```
+构建将使用 [Vite](https://vitejs.dev/) 完成，产物和类型声明均输出到 dist 目录。
+
+### 文档
+```bash
+# 生成文档
+npm run deploy-docs
+```
+
+## 贡献代码
+
+请阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 了解我们的行为准则以及提交拉取请求的流程。
+
+## 许可证
+
+本项目采用 MIT 许可证 - 详情请参阅 [LICENSE](LICENSE) 文件。
 ```
