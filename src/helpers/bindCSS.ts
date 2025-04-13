@@ -15,7 +15,7 @@ export default (elem: HTMLElement, css: CSSStyleDeclaration, priority?: string |
       continue;
     }
     if (priority === 'normal') {
-      elem.style[key] = mergeStyle[key];
+      elem.style.setProperty(key, mergeStyle[key]);
       continue;
     }
     if (elem.style.setProperty) {

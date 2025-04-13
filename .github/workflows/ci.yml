@@ -1,0 +1,128 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v3
+      with:
+        version: 9 # Use a specific major version
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'pnpm' # Change cache to pnpm
+    - run: pnpm install # Change to pnpm install
+    # Temporarily skip lint due to ESLint v9 configuration issue
+    - run: pnpm run lint
+    - run: pnpm run test
+    - run: pnpm run build
+
+  deploy-docs:
+    needs: build
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
+    runs-on: ubuntu-latest
+    # 添加权限设置
+    permissions:
+      contents: write  # 需要写入权限来推送到gh-pages分支
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        persist-credentials: true  # 确保凭证被保留
+
+    - name: Check config file after checkout
+      run: |
+        echo "Checking for config.ts immediately after checkout:"
+        ls -la docs/.vitepress/config.ts || echo "config.ts NOT FOUND after checkout!"
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v3
+      with:
+        version: 9 # Use a specific major version
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20.x
+        cache: 'pnpm' # Change cache to pnpm
+    - name: Install dependencies
+      run: pnpm install # Change to pnpm install
+
+    - name: Check config file before build
+      run: |
+        echo "Checking for config.ts before build:"
+        ls -la docs/.vitepress/config.ts || echo "config.ts NOT FOUND before build!"
+
+    # - run: npm run build # Remove redundant build step
+    - name: Build Docs with Debug
+      run: |
+        echo "Node.js version:"
+        node --version
+        echo "pnpm version:"
+        pnpm --version
+        echo "VitePress version:"
+        pnpm list vitepress
+        echo "Building docs with debug info..."
+        DEBUG=vitepress* pnpm run docs:build
+
+    # 检查构建目录内容
+    - name: Check build directory
+      run: |
+        echo "Listing files in docs/.vitepress/dist:"
+        ls -la docs/.vitepress/dist || echo "docs/.vitepress/dist directory not found"
+        echo "Checking if index.md exists:"
+        ls -la docs/
+        echo "Checking VitePress config:"
+        cat docs/.vitepress/config.ts
+        echo "Trying to find any index.html files:"
+        find docs -name "index.html"
+        echo "Checking for build errors in npm logs:"
+        cat ~/.npm/_logs/* | tail -n 100 || echo "No npm logs found"
+    
+    # 如果VitePress仍然没有生成index.html，手动创建一个
+    - name: Create fallback index.html if needed
+      run: |
+        if [ ! -f docs/.vitepress/dist/index.html ]; then
+          echo "Creating fallback index.html..."
+          echo '<!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="utf-8">
+              <meta http-equiv="refresh" content="0;url=/gwm/guide/">
+              <title>Redirecting...</title>
+            </head>
+            <body>
+              <p>Redirecting to <a href="/gwm/guide/">/gwm/guide/</a>...</p>
+            </body>
+          </html>' > docs/.vitepress/dist/index.html
+          echo "Fallback index.html created."
+        else
+          echo "index.html already exists, no need to create fallback."
+        fi
+    
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs/.vitepress/dist
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        commit_message: 'docs(docs): update gh-pages'
+        # 确保所有文件都被部署，包括隐藏文件
+        force_orphan: true
+        full_commit_message: 'docs(docs): update gh-pages [skip ci]'

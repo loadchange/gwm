@@ -1,4 +1,4 @@
-# TypeScript library starter
+# gwm.js
 
 [![](https://img.shields.io/npm/v/gwm.svg)](https://www.npmjs.com/package/gwm)
 [![](https://img.shields.io/npm/dm/gwm.svg)](https://www.npmjs.com/package/gwm)
@@ -143,20 +143,58 @@ gwm.creation({
 | gwm.observing | Manually open the observer, when the watermarking element is tampered with, re-render the watermarking element. |
 | gwm.cancel | Cancel the observer, the watermark can be hidden or deleted. |
 
+## Development Guide
 
-## The development environment using the method
-**1、Install**
-```
+### Requirements
+- Node.js >= 20.0.0
+- npm >= 9.0.0
+
+### Installation
+```bash
+# Clone the repository
+git clone https://github.com/loadchange/gwm.git
+cd gwm
+
+# Install dependencies
 npm install
 ```
 
-**2、Running projects locally**
-```
+### Development
+```bash
+# Start development server with hot reload
 npm run dev
 ```
-Open index.html preview effect
 
-**3、build command**
+### Testing
+```bash
+# Run tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run tests in watch mode
+npm run test:watch
 ```
+
+### Building
+```bash
+# Build for production (includes type declarations)
 npm run build
+```
+构建将使用 [Vite](https://vitejs.dev/) 完成，产物和类型声明均输出到 dist 目录。
+
+### Documentation
+```bash
+# Generate documentation
+npm run deploy-docs
+```
+
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 ```

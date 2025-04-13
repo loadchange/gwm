@@ -2,7 +2,9 @@ import bindCSS, { isSupport } from './bindCSS';
 import { GenerateWatermark } from '../gwm';
 import { CallbackFunction, GwmObserver, GwmObserverEvent } from '../types';
 
+// eslint-disable-next-line no-var
 declare var WebKitMutationObserver: any;
+// eslint-disable-next-line no-var
 declare var MozMutationObserver: any;
 
 const mutationObserver = MutationObserver || WebKitMutationObserver || MozMutationObserver;
