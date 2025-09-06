@@ -17,22 +17,22 @@ class CanvasWay {
   }
 
   public render(): string {
-    const { x, y, width, height, font, color, fontSize, alpha, angle } = this.watermark;
+    const { width, height, font, color, fontSize, alpha, angle } = this.watermark;
     const txt = this.escapeSpecialCharacters(this.watermark.txt);
     const ctx = this.canvas.getContext('2d');
     if (ctx === null) {
       throw new Error('getContext error');
     }
     ctx.clearRect(0, 0, width, height);
-    ctx.textBaseline = 'top';
-    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
     ctx.fillStyle = color;
     ctx.globalAlpha = alpha;
     ctx.font = `${ fontSize }px ${ font }`;
-    ctx.translate(x, y);
+    // 将旋转中心设置为画布中心，这样可以最大化利用画布空间，避免文字被裁剪
+    ctx.translate(width / 2, height / 2);
     ctx.rotate((Math.PI / 180) * angle);
-    ctx.translate(-x, -y - fontSize);
-    ctx.fillText(txt, x, y + fontSize);
+    ctx.fillText(txt, 0, 0);
     return this.canvas.toDataURL();
   }
 }

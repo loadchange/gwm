@@ -9,7 +9,7 @@ class ElementWay {
   }
 
   private createItem(): HTMLDivElement {
-    const { txt, x, y, font, color, fontSize, alpha, angle, width, height } = this.watermark;
+    const { txt, font, color, fontSize, alpha, angle, width, height } = this.watermark;
     const item: HTMLDivElement = document.createElement('div');
     bindCSS(item, Object.create({
       position: 'relative',
@@ -23,16 +23,16 @@ class ElementWay {
     span.innerHTML = txt;
     bindCSS(span, Object.create({
       position: 'absolute',
-      top: `${ y }px`,
-      left: `${ x }px`,
+      top: '50%',
+      left: '50%',
       fontFamily: font,
       fontSize: `${ fontSize }px`,
       color,
       lineHeight: 1.5,
       opacity: alpha,
       fontWeight: 400,
-      transform: `rotate(${ angle }deg)`,
-      transformOrigin: '0 0',
+      transform: `translate(-50%, -50%) rotate(${ angle }deg)`,
+      transformOrigin: 'center center',
       userSelect: 'none',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
