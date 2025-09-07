@@ -111,8 +111,8 @@ gwm.creation()
         </tr>
         <tr>
             <td>destroy</td>
-            <td>true</td>
-            <td>If `true`, cannot be called repeatedly `creation`</td>
+            <td>false</td>
+            <td>If `true`, prevents multiple calls to `creation` to protect against tampering</td>
         </tr>
         <tr>
             <td>container</td>

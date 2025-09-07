@@ -51,7 +51,7 @@ The `creation` method accepts an options object with the following properties:
 | `mode` | string | 'canvas' | The rendering mode ('canvas', 'svg', or 'element'). |
 | `watch` | boolean | true | Whether to monitor for tampering. |
 | `css` | object | null | Custom CSS styles for the watermark container. |
-| `destroy` | boolean | true | If true, prevents multiple calls to `creation`. |
+| `destroy` | boolean | true | Deprecated. Previously prevented multiple calls to `creation`, now has no effect. |
 | `container` | string \| HTMLElement | document.body | The container element for the watermark. |
 | `count` | number | null | Optional parameter to set the number of watermarks. |
 

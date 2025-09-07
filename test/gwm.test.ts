@@ -159,25 +159,49 @@ describe('GenerateWatermark', () => {
     expect(gwm.observer).toBeDefined();
   });
   
-  // 测试destroy选项
-  it('should respect destroy option', () => {
+  // 测试destroy选项 - 正确的行为
+  it('should respect destroy option and prevent multiple creation', () => {
     // 创建一个新的实例
     const gwm = new GenerateWatermark();
     
     // 创建水印，并设置destroy为true
     gwm.creation({ destroy: true, txt: 'Destroy Test' });
     
-    // 保存原始的creation方法引用
-    const originalCreation = gwm.creation;
+    expect(gwm.opts?.txt).toBe('Destroy Test');
+    expect(gwm.opts?.destroy).toBe(true);
     
-    // 尝试再次调用creation方法
+    // 保存原始的creation方法引用（现在应该被替换为空函数）
+    const replacedCreation = gwm.creation;
+    
+    // 尝试再次调用creation方法 - 应该被阻止
     gwm.creation({ txt: 'Second Creation' });
     
-    // 验证opts没有被更新（因为creation方法被替换为f => f）
+    // 验证opts没有被更新（因为creation方法被替换了）
     expect(gwm.opts?.txt).toBe('Destroy Test');
     
-    // 恢复原始的creation方法
-    gwm.creation = originalCreation;
+    // 验证creation方法确实被替换了
+    expect(replacedCreation).not.toBe(GenerateWatermark.prototype.creation);
+  });
+  
+  // 测试默认情况下destroy为false，允许多次创建
+  it('should allow multiple creation when destroy is false or undefined', () => {
+    const gwm = new GenerateWatermark();
+    
+    // 默认情况下创建水印
+    gwm.creation({ txt: 'First Creation' });
+    expect(gwm.opts?.txt).toBe('First Creation');
+    
+    // 应该能够再次创建
+    gwm.creation({ txt: 'Second Creation' });
+    expect(gwm.opts?.txt).toBe('Second Creation');
+    
+    // 显式设置destroy为false
+    gwm.creation({ destroy: false, txt: 'Third Creation' });
+    expect(gwm.opts?.txt).toBe('Third Creation');
+    
+    // 仍然应该能够再次创建
+    gwm.creation({ txt: 'Fourth Creation' });
+    expect(gwm.opts?.txt).toBe('Fourth Creation');
   });
   
   // 测试container不是body的情况

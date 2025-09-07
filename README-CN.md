@@ -111,8 +111,8 @@ gwm.creation()
         </tr>
         <tr>
             <td>destroy</td>
-            <td>true</td>
-            <td>值为 `true` 时，不能重复调用 `creation`</td>
+            <td>false</td>
+            <td>值为 `true` 时，不能重复调用 `creation`，防止水印被篡改</td>
         </tr>
         <tr>
             <td>container</td>
