@@ -36,6 +36,31 @@ features:
     details: Minimal footprint with optimized performance for smooth user experience.
 ---
 
+<script setup>
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  // 动态加载 gwm.umd.js
+  const script = document.createElement('script')
+  script.src = '/gwm/gwm.umd.js'
+  script.onload = () => {
+    // 创建水印演示
+    if (window.gwm) {
+      window.gwm.creation({
+        txt: 'gwm.js Demo',
+        fontSize: 16,
+        color: '#000000',
+        alpha: 0.05,
+        angle: -20,
+        width: 200,
+        height: 150
+      })
+    }
+  }
+  document.head.appendChild(script)
+})
+</script>
+
 ## Quick Start
 
 ### Installation

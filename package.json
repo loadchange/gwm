@@ -1,6 +1,6 @@
 {
   "name": "gwm",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "generate watermark",
   "keywords": [
     "watermark",
@@ -29,8 +29,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs"
+    "docs:dev": "npm run build && cp dist/gwm.umd.js docs/public/ && vitepress dev docs",
+    "docs:build": "npm run build && cp dist/gwm.umd.js docs/public/ && vitepress build docs"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",

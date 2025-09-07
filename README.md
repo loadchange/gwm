@@ -12,11 +12,8 @@ It can be used to generate watermarking in internal system, which can prompt inf
 + Supporting element monitoring to prevent tampering
 + Extensibility
 
-### Screenshot
-<p align="center"><img src="https://raw.githubusercontent.com/loadchange/gwm/master/images/demo.png" width="700"></p>
-
 ## Example
-Click here to see the effect →：[Demo示例](https://loadchange.github.io/gwm/index.html)
+Click here to see the effect →：[Demo](https://loadchange.github.io/gwm/index.html)
 
 
 ## Instructions
