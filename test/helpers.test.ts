@@ -77,7 +77,7 @@ describe('bindCSS', () => {
     // 在JSDOM环境中，CSS可能不存在，所以我们需要模拟它
     if (typeof CSS === 'undefined') {
       // 如果CSS不存在，我们需要全局定义它
-      (global as any).CSS = {
+      (globalThis as any).CSS = {
         supports: jest.fn().mockReturnValue(true)
       };
     } else {
@@ -91,7 +91,7 @@ describe('bindCSS', () => {
     // 清理模拟
     jest.restoreAllMocks();
     if (typeof CSS !== 'undefined' && !(CSS.supports as any).mockRestore) {
-      delete (global as any).CSS;
+      delete (globalThis as any).CSS;
     }
   });
 });
